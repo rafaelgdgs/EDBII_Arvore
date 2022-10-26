@@ -35,6 +35,7 @@ public class ABB {
 		t.raiz.dir.dir.esq.numNodeEsq = 0;
 		t.raiz.dir.dir.esq.numNodeDir = 0;
 		
+		
 		System.out.println("pre_ordem: " + t.pre_ordem());
 		System.out.println("simetrica: " + t.simetrica());
 		System.out.println("enesimoElemento: " + t.enesimoElemento(5));
@@ -44,6 +45,7 @@ public class ABB {
 		System.out.println("nova simetrica: " + t.simetrica());
 		System.out.println("media: " + t.media(14));
 		System.out.println("mediana: " + t.mediana());
+		System.out.println("ehCheia: " + (t.ehCheia() ? "True" : "False"));
 		
 	}
 

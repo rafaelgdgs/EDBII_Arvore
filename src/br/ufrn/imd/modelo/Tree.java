@@ -141,6 +141,22 @@ public class Tree {
 	}
 	
 	public boolean ehCheia() {
+		return ehCheiaRec(raiz);
+	}
+	
+	static boolean ehCheiaRec(Node n) {
+		if (n.numNodeEsq != n.numNodeDir) {
+			return false;
+		}
+		if (n.numNodeEsq == 0) {
+			return true;
+		}
+		if (!ehCheiaRec(n.esq)) {
+			return false;
+		}
+		if (!ehCheiaRec(n.dir)) {
+			return false;
+		}
 		return true;
 	}
 	
