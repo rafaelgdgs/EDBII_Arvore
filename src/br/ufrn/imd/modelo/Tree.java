@@ -40,6 +40,7 @@ public class Tree {
 	}
 	
 	public Node inserir(int v) {
+		//alterar numNodeEsq e numNodeDir
 		return inserirRec(raiz, v);
 	}
 	
@@ -102,11 +103,25 @@ public class Tree {
 	}
 	
 	public int mediana() {
-		return 0;
+		return (medianaRec(raiz, 0, 0).valor);
+	}
+	
+	static Node medianaRec(Node n, int esq, int dir) {
+		if (n.numNodeEsq + esq == n.numNodeDir + dir) {
+			return n;
+		}
+		else if (n.numNodeEsq + esq > n.numNodeDir + dir) {
+			return medianaRec(n.esq, esq, n.numNodeDir+1 + dir);
+		}
+		else if (n.numNodeEsq + esq < n.numNodeDir + dir) {
+			return medianaRec(n.dir, n.numNodeEsq+1 + esq, dir);
+		}
+		return null;
 	}
 	
 	public double media(int x) {
 		Node r = buscarRec(raiz, x);
+		System.out.println("achou " + r.valor);
 		return mediaNode(r)/(r.numNodeEsq + r.numNodeDir + 1);
 	}
 	

@@ -40,9 +40,10 @@ public class ABB {
 		System.out.println("enesimoElemento: " + t.enesimoElemento(5));
 		System.out.println("posicao: " + t.posicao(8));
 		System.out.println("buscar: " + t.buscar(10).valor);
-		t.inserir(11);
+		//t.inserir(11);
 		System.out.println("nova simetrica: " + t.simetrica());
-		System.out.println("media: " + t.media(3));
+		System.out.println("media: " + t.media(14));
+		System.out.println("mediana: " + t.mediana());
 		
 	}
 
