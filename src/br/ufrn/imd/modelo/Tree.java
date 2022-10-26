@@ -16,6 +16,7 @@ public class Tree {
 		int pos = current.numNodeEsq + 1;
 		while(pos != n) {
 			if (n < pos) {
+				// current.esq == null?
 				current = current.esq;
 				pos -= current.numNodeDir+1;
 			}
@@ -28,7 +29,21 @@ public class Tree {
 	}
 	
 	public int posicao(int x) {
-		return 0;
+		return posicaoRec(x, raiz, raiz.numNodeEsq+1);
+	}
+	
+	static int posicaoRec(int x, Node n, int pos) {
+		int xpos = -1;
+		if (n.valor == x) {
+			return pos;
+		}
+		if (n.esq != null && xpos == -1) {
+			xpos = posicaoRec(x, n.esq, pos-n.esq.numNodeDir-1);
+		}
+		if (n.dir != null && xpos == -1) {
+			xpos = posicaoRec(x, n.dir, pos+n.dir.numNodeEsq+1);
+		}
+		return xpos;
 	}
 	
 	public int mediana() {
