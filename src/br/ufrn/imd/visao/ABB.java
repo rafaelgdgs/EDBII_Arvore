@@ -36,8 +36,13 @@ public class ABB {
 		t.raiz.dir.dir.esq.numNodeDir = 0;
 		
 		System.out.println("pre_ordem: " + t.pre_ordem());
+		System.out.println("simetrica: " + t.simetrica());
 		System.out.println("enesimoElemento: " + t.enesimoElemento(5));
-		System.out.println("posicao: " + t.posicao(2));
+		System.out.println("posicao: " + t.posicao(8));
+		System.out.println("buscar: " + t.buscar(10).valor);
+		t.inserir(11);
+		System.out.println("nova simetrica: " + t.simetrica());
+		System.out.println("media: " + t.media(3));
 		
 	}
 

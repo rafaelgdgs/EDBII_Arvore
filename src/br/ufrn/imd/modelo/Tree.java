@@ -8,6 +8,61 @@ public class Tree {
 		this.raiz = r;
 	}
 	
+	public String simetrica() {
+		String res = new String();
+		res = simetricaRec(raiz, res);
+		return (res.endsWith(" ")) ? (res.substring(0, res.length() - 1)) : res;
+	}
+	
+	static String simetricaRec(Node n, String s) {
+		if (n.esq != null) {
+			s = simetricaRec(n.esq, s);
+		}
+		s += String.valueOf(n.valor) + " ";
+		if (n.dir != null) {
+			s = simetricaRec(n.dir, s);
+		}
+		return s;
+	}
+	
+	public Node buscar(int x) {
+		return (buscarRec(raiz, x));
+	}
+	
+	static Node buscarRec(Node n, int x) {
+		if (n == null || n.valor == x) {
+			return n;
+		}
+		if (x < n.valor) {
+			return buscarRec(n.esq, x);
+		}
+		return buscarRec(n.dir, x);
+	}
+	
+	public Node inserir(int v) {
+		return inserirRec(raiz, v);
+	}
+	
+	static Node inserirRec(Node n, int x) {
+		if (n == null) {
+			n = new Node(x);
+			return n;
+		}
+		else if (x < n.valor) {
+			n.esq = inserirRec(n.esq, x);
+		}
+		else if (x > n.valor) {
+			n.dir = inserirRec(n.dir, x);
+		}
+		return n;
+	}
+	
+	public void remover(int x) {
+		
+	}
+	
+	
+	
 	public int enesimoElemento(int n) {
 		if (n > (raiz.numNodeEsq + raiz.numNodeDir + 1) || n < 1) {
 			return -1;
@@ -51,7 +106,23 @@ public class Tree {
 	}
 	
 	public double media(int x) {
-		return 0;
+		Node r = buscarRec(raiz, x);
+		return mediaNode(r)/(r.numNodeEsq + r.numNodeDir + 1);
+	}
+	
+	static double mediaNode(Node n) {
+		if (n == null) {
+			return 0;
+		}
+		double v = 0;
+		if (n.esq != null) {
+			v += mediaNode(n.esq);
+		}
+		if (n.dir != null) {
+			v += mediaNode(n.dir);
+		}
+		v += n.valor;
+		return v;
 	}
 	
 	public boolean ehCheia() {
