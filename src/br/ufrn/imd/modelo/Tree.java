@@ -41,23 +41,38 @@ public class Tree {
 	
 	public void inserir(int v) {
 		//alterar numNodeEsq e numNodeDir
-		raiz = inserirRec(raiz, v);
+		if (raiz == null) {
+			raiz = new Node(v);
+			return;
+		}
+		inserirRec(raiz, v);
 	}
 	
-	static Node inserirRec(Node n, int x) {
-		if (n == null) {
-			n = new Node(x);
-			return n;
+	static boolean inserirRec(Node n, int x) {
+		if (n.valor == x) {
+			return false;
 		}
 		else if (x < n.valor) {
-			n.esq = inserirRec(n.esq, x);
-			n.numNodeEsq++;
+			if (n.esq == null) {
+				n.esq = new Node(x);
+				n.numNodeEsq++;
+				return true;
+			}
+			else if (inserirRec(n.esq, x)) {
+				n.numNodeEsq++;
+			}
 		}
 		else if (x > n.valor) {
-			n.dir = inserirRec(n.dir, x);
-			n.numNodeDir++;
+			if (n.dir == null) {
+				n.dir = new Node(x);
+				n.numNodeDir++;
+				return true;
+			}
+			else if (inserirRec(n.dir, x)) {
+				n.numNodeDir++;
+			}
 		}
-		return n;
+		return true;
 	}
 	
 	public void remover(int x) {
@@ -67,7 +82,7 @@ public class Tree {
 	
 	
 	public int enesimoElemento(int n) {
-		if (n > (raiz.numNodeEsq + raiz.numNodeDir + 1) || n < 1) {
+		if (n > (raiz.numNodeEsq + raiz.numNodeDir + 1) || n < 1 || raiz == null) {
 			return -1;
 		}
 		Node current = raiz;

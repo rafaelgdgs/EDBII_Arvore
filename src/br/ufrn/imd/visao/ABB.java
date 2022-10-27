@@ -52,6 +52,7 @@ public class ABB {
 		t.inserir(5);
 		t.inserir(9);
 		t.inserir(2);
+		t.inserir(5);
 		t.inserir(4);
 		t.inserir(7);
 		
@@ -59,6 +60,7 @@ public class ABB {
 		System.out.println("raiz = " + t.raiz.valor);
 		System.out.println("simetrica: " + t.simetrica());
 		System.out.println("ehCheia: " + (t.ehCheia() ? "True" : "False"));
+		System.out.println("enesimoElemento: " + t.enesimoElemento(1));
 		
 	}
 
