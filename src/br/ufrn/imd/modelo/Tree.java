@@ -4,8 +4,8 @@ public class Tree {
 
 	public Node raiz;
 	
-	public Tree(Node r) {
-		this.raiz = r;
+	public Tree() {
+		this.raiz = null;
 	}
 	
 	public String simetrica() {
@@ -39,9 +39,9 @@ public class Tree {
 		return buscarRec(n.dir, x);
 	}
 	
-	public Node inserir(int v) {
+	public void inserir(int v) {
 		//alterar numNodeEsq e numNodeDir
-		return inserirRec(raiz, v);
+		raiz = inserirRec(raiz, v);
 	}
 	
 	static Node inserirRec(Node n, int x) {
@@ -51,9 +51,11 @@ public class Tree {
 		}
 		else if (x < n.valor) {
 			n.esq = inserirRec(n.esq, x);
+			n.numNodeEsq++;
 		}
 		else if (x > n.valor) {
 			n.dir = inserirRec(n.dir, x);
+			n.numNodeDir++;
 		}
 		return n;
 	}
