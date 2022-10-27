@@ -39,13 +39,12 @@ public class Tree {
 		return buscarRec(n.dir, x);
 	}
 	
-	public void inserir(int v) {
-		//alterar numNodeEsq e numNodeDir
+	public boolean inserir(int v) {
 		if (raiz == null) {
 			raiz = new Node(v);
-			return;
+			return true;
 		}
-		inserirRec(raiz, v);
+		return inserirRec(raiz, v);
 	}
 	
 	static boolean inserirRec(Node n, int x) {
@@ -60,6 +59,7 @@ public class Tree {
 			}
 			else if (inserirRec(n.esq, x)) {
 				n.numNodeEsq++;
+				return true;
 			}
 		}
 		else if (x > n.valor) {
@@ -70,9 +70,10 @@ public class Tree {
 			}
 			else if (inserirRec(n.dir, x)) {
 				n.numNodeDir++;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 	
 	public void remover(int x) {
