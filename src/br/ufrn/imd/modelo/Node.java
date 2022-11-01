@@ -17,7 +17,7 @@ public class Node {
 		numNodeDir = 0;
 		numNodeEsq = 0;
 		h = 1;
-		ih = 0;
+		ih = 1;
 	}
 
 }

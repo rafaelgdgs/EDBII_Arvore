@@ -57,7 +57,7 @@ public class Tree {
 				n.esq.h = h + 1;
 				n.numNodeEsq++;
 				if (n.dir == null) {
-					n.ih = 1;
+					n.ih = 2;
 				}
 				else {
 					n.ih = n.dir.ih + 1;
@@ -81,7 +81,7 @@ public class Tree {
 				n.dir.h = h + 1;
 				n.numNodeDir++;
 				if (n.esq == null) {
-					n.ih = 1;
+					n.ih = 2;
 				}
 				else {
 					n.ih = n.esq.ih + 1;
@@ -130,7 +130,6 @@ public class Tree {
 				pos += current.numNodeEsq+1;
 			}
 		}
-		System.out.println("H: " + current.h + " , ih: " + current.ih);
 		return current.valor;
 	}
 	
@@ -211,6 +210,24 @@ public class Tree {
 	}
 	
 	public boolean ehCompleta() {
+		if (raiz == null) {
+			return false;
+		}
+		return ehCompletaRec(raiz, raiz.ih);
+	}
+	
+	static boolean ehCompletaRec(Node n, int h) {
+		if (n.esq != null && n.dir != null) {
+			if (!ehCompletaRec(n.esq, h)) {
+				return false;
+			}
+			if (!ehCompletaRec(n.dir, h)) {
+				return false;
+			}
+		}
+		else if (h - n.h > 1) {
+			return false;
+		}
 		return true;
 	}
 	
@@ -241,7 +258,7 @@ public class Tree {
 				System.out.println("Arvore Vazia!");
 				return;
 			}
-			imprimeArvore1Rec(raiz, spaceSize, spaceType, raiz.ih+1, base);
+			imprimeArvore1Rec(raiz, spaceSize, spaceType, raiz.ih, base);
 		}
 		else if (s == 2) {
 			if (raiz == null) {
@@ -249,13 +266,14 @@ public class Tree {
 				return;
 			}
 			imprimeArvore2Rec(raiz);
+			System.out.println();
 		}
 		return;
 	}
 	
 	static void imprimeArvore1Rec(Node n, int s, String t, int startSize, int base) {
 //		System.out.println(space.repeat(startSize * s - n.ih * s) + n.valor + t.repeat(n.ih * s + 5));
-		System.out.println(" ".repeat((n.h-1) * s) + n.valor + t.repeat((startSize - n.h) * s + base));
+		System.out.println(" ".repeat((n.h-1) * s) + n.valor + t.repeat((startSize - n.h) * s + base - String.valueOf(n.valor).length()));
 		if (n.esq != null) {
 			imprimeArvore1Rec(n.esq, s, t, startSize, base);
 		}

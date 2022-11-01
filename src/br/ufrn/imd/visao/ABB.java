@@ -1,5 +1,6 @@
 package br.ufrn.imd.visao;
 
+import br.ufrn.imd.modelo.Node;
 import br.ufrn.imd.modelo.Tree;
 
 public class ABB {
@@ -47,28 +48,35 @@ public class ABB {
 //		System.out.println("ehCheia: " + (t.ehCheia() ? "True" : "False"));
 		
 		Tree t = new Tree();
-		t.inserir(6);
-		t.inserir(5);
-		t.inserir(9);
-		t.inserir(2);
-		t.inserir(5);
-		t.inserir(4);
-		t.inserir(7);
-		t.inserir(3);
-		
-//		t.inserir(5);
-//		t.inserir(3);
-//		t.inserir(8);
 //		t.inserir(6);
+//		t.inserir(5);
 //		t.inserir(9);
+//		t.inserir(2);
+//		t.inserir(5);
+//		t.inserir(4);
+//		t.inserir(7);
+//		t.inserir(3);
+		
+		t.inserir(5);
+		t.inserir(3);
+		t.inserir(2);
+		t.inserir(4);
+		t.inserir(8);
+		t.inserir(6);
+		t.inserir(9);
+		t.inserir(15);
+		t.inserir(1);
 		
 		
 		System.out.println("raiz = " + t.raiz.valor);
 		System.out.println("simetrica: " + t.simetrica());
-		//System.out.println("ehCheia: " + (t.ehCheia() ? "True" : "False"));
-		System.out.println("enesimoElemento: " + t.enesimoElemento(1));
+		//System.out.println("enesimoElemento: " + t.enesimoElemento(4));
+		Node c = t.buscar(5);
+		System.out.println("Valor: " + c.valor + " ,  H: " + c.h + " , ih: " + c.ih);
 		t.imprimeArvore(1);
-		t.imprimeArvore(2);
+		//t.imprimeArvore(2);
+		System.out.println("ehCheia: " + (t.ehCheia() ? "True" : "False"));
+		System.out.println("ehCompleta: " + (t.ehCompleta() ? "True" : "False"));
 	}
 
 }
