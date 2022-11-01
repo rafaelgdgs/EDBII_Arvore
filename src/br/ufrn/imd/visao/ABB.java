@@ -54,13 +54,21 @@ public class ABB {
 		t.inserir(5);
 		t.inserir(4);
 		t.inserir(7);
+		t.inserir(3);
+		
+//		t.inserir(5);
+//		t.inserir(3);
+//		t.inserir(8);
+//		t.inserir(6);
+//		t.inserir(9);
 		
 		
 		System.out.println("raiz = " + t.raiz.valor);
 		System.out.println("simetrica: " + t.simetrica());
 		//System.out.println("ehCheia: " + (t.ehCheia() ? "True" : "False"));
-		System.out.println("enesimoElemento: " + t.enesimoElemento(6));
-		
+		System.out.println("enesimoElemento: " + t.enesimoElemento(1));
+		t.imprimeArvore(1);
+		t.imprimeArvore(2);
 	}
 
 }

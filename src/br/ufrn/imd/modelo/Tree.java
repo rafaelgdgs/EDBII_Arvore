@@ -234,25 +234,45 @@ public class Tree {
 
 	public void imprimeArvore(int s) {
 		if (s == 1) {
-//			int spaceSize = 2;
-//			ArrayList<Integer> space = new ArrayList<Integer>();
-//			ArrayList<Integer> value = new ArrayList<Integer>();
+			int spaceSize = 3;
+			String spaceType = "-";
+			int base = 5;
 			if (raiz == null) {
 				System.out.println("Arvore Vazia!");
 				return;
 			}
-			
-			
-			
+			imprimeArvore1Rec(raiz, spaceSize, spaceType, raiz.ih+1, base);
 		}
 		else if (s == 2) {
-			
+			if (raiz == null) {
+				System.out.println("Arvore Vazia!");
+				return;
+			}
+			imprimeArvore2Rec(raiz);
 		}
 		return;
 	}
 	
-	static void imprimeArvore1Rec(Node n, int s) {
-		
+	static void imprimeArvore1Rec(Node n, int s, String t, int startSize, int base) {
+//		System.out.println(space.repeat(startSize * s - n.ih * s) + n.valor + t.repeat(n.ih * s + 5));
+		System.out.println(" ".repeat((n.h-1) * s) + n.valor + t.repeat((startSize - n.h) * s + base));
+		if (n.esq != null) {
+			imprimeArvore1Rec(n.esq, s, t, startSize, base);
+		}
+		if (n.dir != null) {
+			imprimeArvore1Rec(n.dir, s, t, startSize, base);
+		}
+	}
+	
+	static void imprimeArvore2Rec(Node n) {
+		System.out.print("(" + n.valor);
+		if (n.esq != null) {
+			imprimeArvore2Rec(n.esq);
+		}
+		if (n.dir != null) {
+			imprimeArvore2Rec(n.dir);
+		}
+		System.out.print(")");
 	}
 
 }
