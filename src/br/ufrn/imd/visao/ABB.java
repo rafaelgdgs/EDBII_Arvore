@@ -1,6 +1,5 @@
 package br.ufrn.imd.visao;
 
-import br.ufrn.imd.modelo.Node;
 import br.ufrn.imd.modelo.Tree;
 
 public class ABB {
@@ -59,8 +58,8 @@ public class ABB {
 		
 		System.out.println("raiz = " + t.raiz.valor);
 		System.out.println("simetrica: " + t.simetrica());
-		System.out.println("ehCheia: " + (t.ehCheia() ? "True" : "False"));
-		System.out.println("enesimoElemento: " + t.enesimoElemento(1));
+		//System.out.println("ehCheia: " + (t.ehCheia() ? "True" : "False"));
+		System.out.println("enesimoElemento: " + t.enesimoElemento(6));
 		
 	}
 

@@ -44,39 +44,70 @@ public class Tree {
 			raiz = new Node(v);
 			return true;
 		}
-		return inserirRec(raiz, v);
+		return inserirRec(raiz, v, 1);
 	}
 	
-	static boolean inserirRec(Node n, int x) {
+	static boolean inserirRec(Node n, int x, int h) {
 		if (n.valor == x) {
 			return false;
 		}
 		else if (x < n.valor) {
 			if (n.esq == null) {
 				n.esq = new Node(x);
+				n.esq.h = h + 1;
 				n.numNodeEsq++;
+				if (n.dir == null) {
+					n.ih = 1;
+				}
+				else {
+					n.ih = n.dir.ih + 1;
+				}
 				return true;
 			}
-			else if (inserirRec(n.esq, x)) {
+			else if (inserirRec(n.esq, x, ++h)) {
 				n.numNodeEsq++;
+				if (n.dir == null) {
+					n.ih = n.esq.ih + 1;
+				}
+				else {
+					n.ih = n.dir.ih > n.esq.ih ? n.dir.ih + 1 : n.esq.ih + 1;
+				}
 				return true;
 			}
 		}
 		else if (x > n.valor) {
 			if (n.dir == null) {
 				n.dir = new Node(x);
+				n.dir.h = h + 1;
 				n.numNodeDir++;
+				if (n.esq == null) {
+					n.ih = 1;
+				}
+				else {
+					n.ih = n.esq.ih + 1;
+				}
 				return true;
 			}
-			else if (inserirRec(n.dir, x)) {
+			else if (inserirRec(n.dir, x, ++h)) {
 				n.numNodeDir++;
+				if (n.esq == null) {
+					n.ih = n.dir.ih + 1;
+				}
+				else {
+					n.ih = n.dir.ih > n.esq.ih ? n.dir.ih + 1 : n.esq.ih + 1;
+				}
 				return true;
 			}
 		}
 		return false;
 	}
 	
+	
 	public void remover(int x) {
+		removerRec(raiz, x);
+	}
+	
+	static void removerRec(Node n, int x) {
 		
 	}
 	
@@ -99,6 +130,7 @@ public class Tree {
 				pos += current.numNodeEsq+1;
 			}
 		}
+		System.out.println("H: " + current.h + " , ih: " + current.ih);
 		return current.valor;
 	}
 	
@@ -201,6 +233,25 @@ public class Tree {
 	}
 
 	public void imprimeArvore(int s) {
+		if (s == 1) {
+//			int spaceSize = 2;
+//			ArrayList<Integer> space = new ArrayList<Integer>();
+//			ArrayList<Integer> value = new ArrayList<Integer>();
+			if (raiz == null) {
+				System.out.println("Arvore Vazia!");
+				return;
+			}
+			
+			
+			
+		}
+		else if (s == 2) {
+			
+		}
+		return;
+	}
+	
+	static void imprimeArvore1Rec(Node n, int s) {
 		
 	}
 
