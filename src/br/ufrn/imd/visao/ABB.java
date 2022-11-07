@@ -68,15 +68,17 @@ public class ABB {
 		t.inserir(1);
 		
 		
-		System.out.println("raiz = " + t.raiz.valor);
-		System.out.println("simetrica: " + t.simetrica());
+		//System.out.println("raiz = " + t.raiz.valor);
+		//System.out.println("simetrica: " + t.simetrica());
 		//System.out.println("enesimoElemento: " + t.enesimoElemento(4));
-		Node c = t.buscar(5);
-		System.out.println("Valor: " + c.valor + " ,  H: " + c.h + " , ih: " + c.ih);
+		//Node c = t.buscar(5);
+		//System.out.println("Valor: " + c.valor + " ,  H: " + c.h + " , ih: " + c.ih);
 		t.imprimeArvore(1);
 		//t.imprimeArvore(2);
-		System.out.println("ehCheia: " + (t.ehCheia() ? "True" : "False"));
-		System.out.println("ehCompleta: " + (t.ehCompleta() ? "True" : "False"));
+		//System.out.println("ehCheia: " + (t.ehCheia() ? "True" : "False"));
+		//System.out.println("ehCompleta: " + (t.ehCompleta() ? "True" : "False"));
+		t.remover(5);
+		t.imprimeArvore(1);
 	}
 
 }

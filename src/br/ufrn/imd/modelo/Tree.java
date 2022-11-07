@@ -104,14 +104,41 @@ public class Tree {
 	
 	
 	public void remover(int x) {
-		removerRec(raiz, x);
+		raiz = removerRec(raiz, x);
 	}
 	
-	static void removerRec(Node n, int x) {
-		
+	static Node removerRec(Node n, int x) {
+		if (n == null) {
+			return n;
+		}
+		if (x < n.valor) {
+			n.esq = removerRec(n.esq, x);
+		}
+		else if (x > n.valor) {
+			n.dir = removerRec(n.dir, x);
+		}
+		else {
+			if (n.esq == null) {
+				return n.dir;
+			}
+			else if (n.dir == null) {
+				return n.esq;
+			}
+			
+			int va = n.dir.valor;
+			Node no = n.dir;
+			while (no.esq != null) {
+				va = no.esq.valor;
+				//no.numNodeEsq--;
+				no = no.esq;
+			}
+			n.valor = va;
+			//n.numNodeDir--;
+			n.dir = removerRec(n.dir, n.valor);
+			
+		}
+		return n;
 	}
-	
-	
 	
 	public int enesimoElemento(int n) {
 		if (n > (raiz.numNodeEsq + raiz.numNodeDir + 1) || n < 1 || raiz == null) {
