@@ -114,10 +114,14 @@ public class Tree {
 			else {
 				if (raiz.esq == null) {
 					raiz = raiz.dir;
+					updatelvl(raiz, 1);
+					updateh(raiz);
 					return true;
 				}
 				else if (raiz.dir == null) {
 					raiz = raiz.esq;
+					updatelvl(raiz, 1);
+					updateh(raiz);
 					return true;
 				}
 				int va = raiz.esq.valor;
@@ -142,10 +146,14 @@ public class Tree {
 						no1.dir = null;
 					}
 				}
+				updatelvl(raiz, 1);
+				updateh(raiz);
 				return true;
 			}
 		}
 		else if (temp > 0) {
+			updatelvl(raiz, 1);
+			updateh(raiz);
 			return true;
 		}
 		return false;
@@ -277,6 +285,35 @@ public class Tree {
 			return;
 		}
 		return;
+	}
+	
+	static void updatelvl(Node n, int x) {
+		n.lvl = x;
+		if (n.esq != null) {
+			updatelvl(n.esq, x+1);
+		}
+		if (n.dir != null) {
+			updatelvl(n.dir, x+1);
+		}
+	}
+	
+	static int updateh(Node n) {
+		if (n.esq == null && n.dir == null) {
+			return 1;
+		}
+		else if (n.esq == null) {
+			n.h = updateh(n.dir);
+		}
+		else if (n.dir == null) {
+			n.h = updateh(n.esq);
+		}
+		else {
+			int a, b;
+			a = updateh(n.esq);
+			b = updateh(n.dir);
+			n.h = a > b ? a : b;
+		}
+		return 1;
 	}
 	
 	public int enesimoElemento(int n) {
