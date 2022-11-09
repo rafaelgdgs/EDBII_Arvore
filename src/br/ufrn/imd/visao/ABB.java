@@ -91,6 +91,7 @@ public class ABB {
 
 	public static void main(String[] args) {
 		
+		//seção 1
 		JFileChooser chooser = new JFileChooser();
 		chooser.setDialogTitle("Selecione o arquivo 1");
         if (chooser.showOpenDialog(null) != JFileChooser.APPROVE_OPTION)
@@ -109,12 +110,15 @@ public class ABB {
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
+        //fim seção 1
 		
+        //seção 2
 //		try {
 //			ABB.lerDoArquivo("Endereco_arquivo1.txt", "Endereco_arquivo2.txt");
 //		} catch (FileNotFoundException e) {
 //			e.printStackTrace();
 //		}
+        //fim seção 2
 	}
 
 }
