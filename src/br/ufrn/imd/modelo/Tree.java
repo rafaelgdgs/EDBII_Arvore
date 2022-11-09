@@ -441,8 +441,8 @@ public class Tree {
 	
 	static void imprimeArvore1Rec(Node n, int s, String t, int startSize, int base) {
 //		System.out.println(space.repeat(startSize * s - n.ih * s) + n.valor + t.repeat(n.ih * s + 5));
-		//System.out.println(" ".repeat((n.lvl-1) * s) + n.valor + t.repeat((startSize - n.lvl) * s + base - String.valueOf(n.valor).length()));
-		System.out.println(" ".repeat((n.lvl-1) * s) + n.valor + " " + n.numNodeEsq + " " + n.numNodeDir + t.repeat((startSize - n.lvl) * s + base - String.valueOf(n.valor).length()));
+		System.out.println(" ".repeat((n.lvl-1) * s) + n.valor + t.repeat((startSize - n.lvl) * s + base - String.valueOf(n.valor).length()));
+		//System.out.println(" ".repeat((n.lvl-1) * s) + n.valor + " " + n.numNodeEsq + " " + n.numNodeDir + t.repeat((startSize - n.lvl) * s + base - String.valueOf(n.valor).length()));
 		if (n.esq != null) {
 			imprimeArvore1Rec(n.esq, s, t, startSize, base);
 		}
