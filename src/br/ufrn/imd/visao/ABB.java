@@ -91,7 +91,7 @@ public class ABB {
 	public static void main(String[] args) {
 		
 		try {
-			ABB.lerDoArquivo("\\\\wsl.localhost\\Ubuntu\\home\\jhinlinux\\EDBII\\tests\\arquivo1.txt", "\\\\wsl.localhost\\Ubuntu\\home\\jhinlinux\\EDBII\\tests\\arquivo2.txt");
+			ABB.lerDoArquivo("Endereco_arquivo1.txt", "Endereco_arquivo2.txt");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
