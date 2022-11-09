@@ -44,7 +44,12 @@ public class ABB {
                 else System.out.println("Chave não encontrada");
             }
             else if(Objects.equals(textoLinha[0], "REMOVA")) {
-                arvore.remover(Integer.parseInt(textoLinha[1]));
+                if (arvore.remover(Integer.parseInt(textoLinha[1]))) {
+                	System.out.println(Integer.parseInt(textoLinha[1]) + " removido");
+                }
+                else {
+                	System.out.println(Integer.parseInt(textoLinha[1]) + " não está na árvore, não pode ser removido");
+                }
             }
             else if(Objects.equals(textoLinha[0], "ENESIMO")) {
                 System.out.println(arvore.enesimoElemento(Integer.parseInt(textoLinha[1])));
@@ -84,50 +89,6 @@ public class ABB {
     }
 
 	public static void main(String[] args) {
-		
-//		System.out.println("pre_ordem: " + t.pre_ordem());
-//		System.out.println("simetrica: " + t.simetrica());
-//		System.out.println("enesimoElemento: " + t.enesimoElemento(5));
-//		System.out.println("posicao: " + t.posicao(8));
-//		System.out.println("buscar: " + t.buscar(10).valor);
-//		//t.inserir(11);
-//		System.out.println("nova simetrica: " + t.simetrica());
-//		System.out.println("media: " + t.media(14));
-//		System.out.println("mediana: " + t.mediana());
-//		System.out.println("ehCheia: " + (t.ehCheia() ? "True" : "False"));
-		
-//		Tree t = new Tree();
-//		t.inserir(6);
-//		t.inserir(5);
-//		t.inserir(9);
-//		t.inserir(2);
-//		t.inserir(5);
-//		t.inserir(4);
-//		t.inserir(7);
-//		t.inserir(3);
-		
-//		t.inserir(5);
-//		t.inserir(3);
-//		t.inserir(2);
-//		t.inserir(4);
-//		t.inserir(8);
-//		t.inserir(6);
-//		t.inserir(9);
-//		t.inserir(15);
-//		t.inserir(1);
-		
-		
-		//System.out.println("raiz = " + t.raiz.valor);
-		//System.out.println("simetrica: " + t.simetrica());
-		//System.out.println("enesimoElemento: " + t.enesimoElemento(4));
-		//Node c = t.buscar(5);
-		//System.out.println("Valor: " + c.valor + " ,  H: " + c.h + " , ih: " + c.ih);
-//		t.imprimeArvore(1);
-		//t.imprimeArvore(2);
-		//System.out.println("ehCheia: " + (t.ehCheia() ? "True" : "False"));
-		//System.out.println("ehCompleta: " + (t.ehCompleta() ? "True" : "False"));
-//		t.remover(5);
-//		t.imprimeArvore(1);
 		
 		try {
 			ABB.lerDoArquivo("\\\\wsl.localhost\\Ubuntu\\home\\jhinlinux\\EDBII\\tests\\arquivo1.txt", "\\\\wsl.localhost\\Ubuntu\\home\\jhinlinux\\EDBII\\tests\\arquivo2.txt");

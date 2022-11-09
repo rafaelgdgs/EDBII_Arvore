@@ -54,23 +54,23 @@ public class Tree {
 		else if (x < n.valor) {
 			if (n.esq == null) {
 				n.esq = new Node(x);
-				n.esq.h = h + 1;
+				n.esq.lvl = h + 1;
 				n.numNodeEsq++;
 				if (n.dir == null) {
-					n.ih = 2;
+					n.h = 2;
 				}
 				else {
-					n.ih = n.dir.ih + 1;
+					n.h = n.dir.h + 1;
 				}
 				return true;
 			}
 			else if (inserirRec(n.esq, x, ++h)) {
 				n.numNodeEsq++;
 				if (n.dir == null) {
-					n.ih = n.esq.ih + 1;
+					n.h = n.esq.h + 1;
 				}
 				else {
-					n.ih = n.dir.ih > n.esq.ih ? n.dir.ih + 1 : n.esq.ih + 1;
+					n.h = n.dir.h > n.esq.h ? n.dir.h + 1 : n.esq.h + 1;
 				}
 				return true;
 			}
@@ -78,23 +78,23 @@ public class Tree {
 		else if (x > n.valor) {
 			if (n.dir == null) {
 				n.dir = new Node(x);
-				n.dir.h = h + 1;
+				n.dir.lvl = h + 1;
 				n.numNodeDir++;
 				if (n.esq == null) {
-					n.ih = 2;
+					n.h = 2;
 				}
 				else {
-					n.ih = n.esq.ih + 1;
+					n.h = n.esq.h + 1;
 				}
 				return true;
 			}
 			else if (inserirRec(n.dir, x, ++h)) {
 				n.numNodeDir++;
 				if (n.esq == null) {
-					n.ih = n.dir.ih + 1;
+					n.h = n.dir.h + 1;
 				}
 				else {
-					n.ih = n.dir.ih > n.esq.ih ? n.dir.ih + 1 : n.esq.ih + 1;
+					n.h = n.dir.h > n.esq.h ? n.dir.h + 1 : n.esq.h + 1;
 				}
 				return true;
 			}
@@ -103,41 +103,180 @@ public class Tree {
 	}
 	
 	
-	public void remover(int x) {
-		raiz = removerRec(raiz, x);
+	public boolean remover(int x) {
+		int temp;
+		temp = removerRec(raiz, x);
+		if (temp == 2) {
+			if (raiz.dir == null && raiz.esq == null) {
+				raiz = null;
+				return true;
+			}
+			else {
+				if (raiz.esq == null) {
+					raiz = raiz.dir;
+					return true;
+				}
+				else if (raiz.dir == null) {
+					raiz = raiz.esq;
+					return true;
+				}
+				int va = raiz.esq.valor;
+				Node no = raiz.esq;
+				Node no1 = null;
+				while (no.dir != null) {
+					va = no.dir.valor;
+					no.numNodeDir--;
+					no1 = no;
+					no = no.dir;
+				}
+				if (no.esq != null) {
+					
+				}
+				raiz.valor = va;
+				raiz.numNodeEsq--;
+				if (no1 != null) {
+					if (no.esq != null) {
+						no1.dir = no.esq;
+					}
+					else {
+						no1.dir = null;
+					}
+				}
+				return true;
+			}
+		}
+		else if (temp > 0) {
+			return true;
+		}
+		return false;
 	}
 	
-	static Node removerRec(Node n, int x) {
-		if (n == null) {
-			return n;
+	static int removerRec(Node n, int x) {
+		int temp;
+		if ((x < n.valor && n.esq == null) || (x > n.valor && n.dir == null)) {
+			return 0;
 		}
-		if (x < n.valor) {
-			n.esq = removerRec(n.esq, x);
-		}
-		else if (x > n.valor) {
-			n.dir = removerRec(n.dir, x);
-		}
-		else {
-			if (n.esq == null) {
-				return n.dir;
+		if (x < n.valor && (temp = removerRec(n.esq, x)) > 0) {
+			n.numNodeEsq--;
+			if (temp > 1) {
+				remover3caso(n, 1);
 			}
-			else if (n.dir == null) {
-				return n.esq;
+			return 1;
+		}
+		else if (x > n.valor && (temp = removerRec(n.dir, x)) > 0) {
+			n.numNodeDir--;
+			if (temp > 1) {
+				remover3caso(n, 2);
+			}
+			return 1;
+		}
+		else if (x == n.valor){
+			return 2;
+		}
+		return 0;
+		
+		
+//		if (n == null) {
+//			return n;
+//		}
+//		if (x < n.valor) {
+//			n.esq = removerRec(n.esq, x);
+//		}
+//		else if (x > n.valor) {
+//			n.dir = removerRec(n.dir, x);
+//		}
+//		else {
+//			if (n.esq == null) {
+//				return n.dir;
+//			}
+//			else if (n.dir == null) {
+//				return n.esq;
+//			}
+//			
+//			int va = n.dir.valor;
+//			Node no = n.dir;
+//			while (no.esq != null) {
+//				va = no.esq.valor;
+//				//no.numNodeEsq--;
+//				no = no.esq;
+//			}
+//			n.valor = va;
+//			//n.numNodeDir--;
+//			n.dir = removerRec(n.dir, n.valor);
+//			
+//		}
+//		return n;
+	}
+	
+	static void remover3caso(Node n, int side) {
+		if (side == 1) {
+			if (n.esq.dir == null && n.esq.esq == null) {
+				n.esq = null;
+				return;
+			}
+			else if (n.esq.esq == null) {
+				n.esq = n.esq.dir;
+				return;
+			}
+			else if (n.esq.dir == null) {
+				n.esq = n.esq.esq;
+				return;
 			}
 			
-			int va = n.dir.valor;
-			Node no = n.dir;
+			int va = n.esq.valor;
+			Node no = n.esq;
+			Node no1 = null;
 			while (no.esq != null) {
 				va = no.esq.valor;
-				//no.numNodeEsq--;
+				no.numNodeEsq--;
+				no1 = no;
 				no = no.esq;
 			}
-			n.valor = va;
-			//n.numNodeDir--;
-			n.dir = removerRec(n.dir, n.valor);
-			
+			n.esq.valor = va;
+			if (no1 != null) {
+				if (no.dir != null) {
+					no1.esq = no.dir;
+				}
+				else {
+					no1.esq = null;
+				}
+			}
+			return;
 		}
-		return n;
+		else if (side == 2) {
+			if (n.dir.dir == null && n.dir.esq == null) {
+				n.dir = null;
+				return;
+			}
+			else if (n.dir.esq == null) {
+				n.dir = n.dir.dir;
+				return;
+			}
+			else if (n.dir.dir == null) {
+				n.dir = n.dir.esq;
+				return;
+			}
+			int va = n.dir.valor;
+			Node no = n.dir;
+			Node no1 = null;
+			while (no.esq != null) {
+				va = no.esq.valor;
+				no.numNodeEsq--;
+				no1 = no;
+				no = no.esq;
+			}
+			n.dir.valor = va;
+			if (no1 != null) {
+				if (no.dir != null) {
+					no1.esq = no.dir;
+				}
+				else {
+					no1.esq = null;
+				}
+			}
+			return;
+		}
+		return;
 	}
 	
 	public int enesimoElemento(int n) {
@@ -179,25 +318,27 @@ public class Tree {
 	}
 	
 	public int mediana() {
-		return (medianaRec(raiz, 0, 0).valor);
+//		return (medianaRec(raiz, 0, 0).valor);
+		int total = raiz.numNodeDir + raiz.numNodeEsq + 1;
+		return enesimoElemento(total/2);
 	}
 	
-	static Node medianaRec(Node n, int esq, int dir) {
-		if (n.numNodeEsq + esq == n.numNodeDir + dir) {
-			return n;
-		}
-		else if (n.numNodeEsq + esq > n.numNodeDir + dir) {
-			return medianaRec(n.esq, esq, n.numNodeDir+1 + dir);
-		}
-		else if (n.numNodeEsq + esq < n.numNodeDir + dir) {
-			return medianaRec(n.dir, n.numNodeEsq+1 + esq, dir);
-		}
-		return null;
-	}
+//	static Node medianaRec(Node n, int esq, int dir) {
+		
+//		if (n.numNodeEsq + esq == n.numNodeDir + dir) {
+//			return n;
+//		}
+//		else if (n.numNodeEsq + esq > n.numNodeDir + dir) {
+//			return medianaRec(n.esq, esq, n.numNodeDir+1 + dir);
+//		}
+//		else if (n.numNodeEsq + esq < n.numNodeDir + dir) {
+//			return medianaRec(n.dir, n.numNodeEsq+1 + esq, dir);
+//		}
+//		return null;
+//	}S
 	
 	public double media(int x) {
 		Node r = buscarRec(raiz, x);
-		System.out.println("achou " + r.valor);
 		return mediaNode(r)/(r.numNodeEsq + r.numNodeDir + 1);
 	}
 	
@@ -240,7 +381,7 @@ public class Tree {
 		if (raiz == null) {
 			return false;
 		}
-		return ehCompletaRec(raiz, raiz.ih);
+		return ehCompletaRec(raiz, raiz.h);
 	}
 	
 	static boolean ehCompletaRec(Node n, int h) {
@@ -252,7 +393,7 @@ public class Tree {
 				return false;
 			}
 		}
-		else if (h - n.h > 1) {
+		else if (h - n.lvl > 1) {
 			return false;
 		}
 		return true;
@@ -280,12 +421,12 @@ public class Tree {
 		if (s == 1) {
 			int spaceSize = 3;
 			String spaceType = "-";
-			int base = 5;
+			int base = 10;
 			if (raiz == null) {
 				System.out.println("Arvore Vazia!");
 				return;
 			}
-			imprimeArvore1Rec(raiz, spaceSize, spaceType, raiz.ih, base);
+			imprimeArvore1Rec(raiz, spaceSize, spaceType, raiz.h, base);
 		}
 		else if (s == 2) {
 			if (raiz == null) {
@@ -300,7 +441,8 @@ public class Tree {
 	
 	static void imprimeArvore1Rec(Node n, int s, String t, int startSize, int base) {
 //		System.out.println(space.repeat(startSize * s - n.ih * s) + n.valor + t.repeat(n.ih * s + 5));
-		System.out.println(" ".repeat((n.h-1) * s) + n.valor + t.repeat((startSize - n.h) * s + base - String.valueOf(n.valor).length()));
+		//System.out.println(" ".repeat((n.lvl-1) * s) + n.valor + t.repeat((startSize - n.lvl) * s + base - String.valueOf(n.valor).length()));
+		System.out.println(" ".repeat((n.lvl-1) * s) + n.valor + " " + n.numNodeEsq + " " + n.numNodeDir + t.repeat((startSize - n.lvl) * s + base - String.valueOf(n.valor).length()));
 		if (n.esq != null) {
 			imprimeArvore1Rec(n.esq, s, t, startSize, base);
 		}

@@ -7,8 +7,8 @@ public class Node {
 	public Node esq;
 	public int numNodeDir;
 	public int numNodeEsq;
+	public int lvl;
 	public int h;
-	public int ih;
 	
 	public Node(int v) {
 		this.valor = v;
@@ -16,8 +16,8 @@ public class Node {
 		esq = null;
 		numNodeDir = 0;
 		numNodeEsq = 0;
+		lvl = 1;
 		h = 1;
-		ih = 1;
 	}
 
 }
