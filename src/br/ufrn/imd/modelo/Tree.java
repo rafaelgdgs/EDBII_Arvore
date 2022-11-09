@@ -320,7 +320,7 @@ public class Tree {
 	public int mediana() {
 //		return (medianaRec(raiz, 0, 0).valor);
 		int total = raiz.numNodeDir + raiz.numNodeEsq + 1;
-		return enesimoElemento(total/2);
+		return (total % 2 == 0) ? enesimoElemento(total/2) : enesimoElemento(total/2 + 1);
 	}
 	
 //	static Node medianaRec(Node n, int esq, int dir) {
