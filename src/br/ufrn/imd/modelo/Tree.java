@@ -182,38 +182,6 @@ public class Tree {
 			return 2;
 		}
 		return 0;
-		
-		
-//		if (n == null) {
-//			return n;
-//		}
-//		if (x < n.valor) {
-//			n.esq = removerRec(n.esq, x);
-//		}
-//		else if (x > n.valor) {
-//			n.dir = removerRec(n.dir, x);
-//		}
-//		else {
-//			if (n.esq == null) {
-//				return n.dir;
-//			}
-//			else if (n.dir == null) {
-//				return n.esq;
-//			}
-//			
-//			int va = n.dir.valor;
-//			Node no = n.dir;
-//			while (no.esq != null) {
-//				va = no.esq.valor;
-//				//no.numNodeEsq--;
-//				no = no.esq;
-//			}
-//			n.valor = va;
-//			//n.numNodeDir--;
-//			n.dir = removerRec(n.dir, n.valor);
-//			
-//		}
-//		return n;
 	}
 	
 	static void remover3caso(Node n, int side) {
@@ -302,18 +270,18 @@ public class Tree {
 			return 1;
 		}
 		else if (n.esq == null) {
-			n.h = updateh(n.dir);
+			n.h = updateh(n.dir)+1;
 		}
 		else if (n.dir == null) {
-			n.h = updateh(n.esq);
+			n.h = updateh(n.esq)+1;
 		}
 		else {
 			int a, b;
-			a = updateh(n.esq);
-			b = updateh(n.dir);
+			a = updateh(n.esq)+1;
+			b = updateh(n.dir)+1;
 			n.h = a > b ? a : b;
 		}
-		return 1;
+		return n.h;
 	}
 	
 	public int enesimoElemento(int n) {
@@ -355,24 +323,9 @@ public class Tree {
 	}
 	
 	public int mediana() {
-//		return (medianaRec(raiz, 0, 0).valor);
 		int total = raiz.numNodeDir + raiz.numNodeEsq + 1;
 		return (total % 2 == 0) ? enesimoElemento(total/2) : enesimoElemento(total/2 + 1);
 	}
-	
-//	static Node medianaRec(Node n, int esq, int dir) {
-		
-//		if (n.numNodeEsq + esq == n.numNodeDir + dir) {
-//			return n;
-//		}
-//		else if (n.numNodeEsq + esq > n.numNodeDir + dir) {
-//			return medianaRec(n.esq, esq, n.numNodeDir+1 + dir);
-//		}
-//		else if (n.numNodeEsq + esq < n.numNodeDir + dir) {
-//			return medianaRec(n.dir, n.numNodeEsq+1 + esq, dir);
-//		}
-//		return null;
-//	}S
 	
 	public double media(int x) {
 		Node r = buscarRec(raiz, x);
@@ -395,6 +348,9 @@ public class Tree {
 	}
 	
 	public boolean ehCheia() {
+		if (raiz == null) {
+			return false;
+		}
 		return ehCheiaRec(raiz);
 	}
 	
@@ -477,9 +433,8 @@ public class Tree {
 	}
 	
 	static void imprimeArvore1Rec(Node n, int s, String t, int startSize, int base) {
-//		System.out.println(space.repeat(startSize * s - n.ih * s) + n.valor + t.repeat(n.ih * s + 5));
 		System.out.println(" ".repeat((n.lvl-1) * s) + n.valor + t.repeat((startSize - n.lvl) * s + base - String.valueOf(n.valor).length()));
-		//System.out.println(" ".repeat((n.lvl-1) * s) + n.valor + " " + n.numNodeEsq + " " + n.numNodeDir + t.repeat((startSize - n.lvl) * s + base - String.valueOf(n.valor).length()));
+		//System.out.println(" ".repeat((n.lvl-1) * s) + n.valor + " lvl:" + n.lvl + " h:" + n.h + " esq:" + n.numNodeEsq + " dir:" + n.numNodeDir + t.repeat((startSize - n.lvl) * s + base - String.valueOf(n.valor).length()));
 		if (n.esq != null) {
 			imprimeArvore1Rec(n.esq, s, t, startSize, base);
 		}

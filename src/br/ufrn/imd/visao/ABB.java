@@ -1,12 +1,13 @@
 package br.ufrn.imd.visao;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+
+import javax.swing.JFileChooser;
 
 import br.ufrn.imd.modelo.Node;
 import br.ufrn.imd.modelo.Tree;
@@ -90,11 +91,30 @@ public class ABB {
 
 	public static void main(String[] args) {
 		
-		try {
-			ABB.lerDoArquivo("Endereco_arquivo1.txt", "Endereco_arquivo2.txt");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+		JFileChooser chooser = new JFileChooser();
+		chooser.setDialogTitle("Selecione o arquivo 1");
+        if (chooser.showOpenDialog(null) != JFileChooser.APPROVE_OPTION)
+            return;
+
+        String arquivo1 = chooser.getSelectedFile().getAbsolutePath();
+
+        chooser.setDialogTitle("Selecione o arquivo 2");
+        if (chooser.showOpenDialog(null) != JFileChooser.APPROVE_OPTION)
+            return;
+
+        String arquivo2 = chooser.getSelectedFile().getAbsolutePath();
+
+        try {
+			ABB.lerDoArquivo(arquivo1, arquivo2);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
 		}
+		
+//		try {
+//			ABB.lerDoArquivo("Endereco_arquivo1.txt", "Endereco_arquivo2.txt");
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 }
